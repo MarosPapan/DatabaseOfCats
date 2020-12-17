@@ -1,0 +1,22 @@
+{% extends 'macky/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row text-center perszske-container">
+        <div class="col-lg-12">
+            {% if cats.image %}
+                <img src="{{cats.image.url}}" width="300" height="168">
+            {% else %}
+                <img src="{% static 'macky/pictures/icon_cat.png' %}" width="300" height="168">
+            {% endif %}
+            <h2>{{cats.meno}} </h2>
+            <h6>Roky: {{cats.rok}}</h6>
+            <h6>Hmotnost: {{cats.hmotnost}} kg</h6>
+            <h6>Vyska: {{cats.vyska}} cm</h6>
+            <h6>Kastracia: {{cats.kastracie}}</h6>
+            <p>{{cats.popis}}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

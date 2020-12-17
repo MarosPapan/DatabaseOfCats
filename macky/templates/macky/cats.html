@@ -1,0 +1,39 @@
+{% extends 'macky/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>{{urcita_rasa.meno_rasy}}</h1>
+    <p>{{urcita_rasa.popis_rasy}}</p>
+    <div class="row text-center perszske-container">
+                {% for cats in page_obj %}
+                    <div class="col-lg-4">
+                        {% if cats.image %}
+                            <img src="{{cats.image.url}}" width="300" height="168">
+                        {% else %}
+                            <img src="{% static 'macky/pictures/icon_cat.png' %}" width="300" height="168">
+                        {% endif %}
+                        <a href="/macka/{{cats.id}}"><h2>{{cats.meno}} </h2></a>
+                        <h6>Roky: {{cats.rok}}</h6>
+                    </div>
+                {% endfor %}
+    </div>
+    <div class="pagination text-center">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Prva</a>
+                <a href="?page={{ page_obj.previous_page_number}}">- dozadu</a>
+            {% endif %}
+
+            <span class="current">
+                Strana {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">dalej</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">- posledna &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}
